@@ -1,7 +1,19 @@
 ML_Ops_Risque_Climatique
 ==============================
 
-Prévision du risque climatique
+API qui permet à un utilisateur de récupérer la probabilité de catastrophe naturelle à partir de coordonnées géographiques sur le territoire Français.
+
+Données utilisées
+------------
+
+2 types de sources publiques :
+- données GASPAR (Gestion Assistée des Procédures Administratives relatives aux Risques naturels) recensant les catastrophes naturelles depuis 1982.
+- données INSEE de recensement des communes de France
+  
+Modèle
+------------
+
+
 
 Project Organization
 ------------
@@ -55,3 +67,21 @@ Project Organization
 --------
 
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+
+Installation
+------------
+
+
+
+Tests
+------------
+
+
+Fonctionnalités pour un utilisateur de l'API
+------------
+
+
+
+Fonctionnalités pour un administrateur
+------------
