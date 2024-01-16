@@ -2,8 +2,7 @@ from src.main import get_prediction
 from src.main import app
 import json
 from fastapi.testclient import TestClient
-import pytest
-from scr.main import __version__
+
 
 client = TestClient(app)
 
@@ -12,9 +11,9 @@ client = TestClient(app)
 # https://fastapi.tiangolo.com/tutorial/testing/
 
 def test_read_main():
-    response = client.get("/version")
+    response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"msg": "Hello World"}
+    assert response.json() == {"msg": "MC Intro MLOPS"}
 
 
 # def test_predict_endpoint():

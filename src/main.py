@@ -115,7 +115,11 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
 
 @app.get("/version")
 def get_version():
-    return {"version":"1.0.0"}
+    return {"version":"1.0.0"}*
+
+@app.get("/")
+async def read_main():
+    return {"msg": "MC Intro MLOPS"}
 
 #Endpoint pour afficher les logs si l'utilisateur est un administrateur
 @app.get("/view-logs")
