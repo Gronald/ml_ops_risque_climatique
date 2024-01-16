@@ -6,8 +6,6 @@ from fastapi.testclient import TestClient
 
 client = TestClient(app)
 
-
-
 # https://fastapi.tiangolo.com/tutorial/testing/
 
 def test_read_main():
@@ -35,7 +33,7 @@ def test_read_main():
 #         "longitude": -75.0,
 #         "annee": 2022
 #     }
-#     response = client.post("/predict", json=data)
+#     response = client.post("/predict", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
 #     assert response.status_code == 422  # Erreur de validation des données
 
 # def test_predict_endpoint_invalid_credentials():
@@ -48,11 +46,11 @@ def test_read_main():
 #     response = client.post("/predict", json=data, headers={"Authorization": "Basic invalid_credentials"})
 #     assert response.status_code == 401  # Invalid credentials
 
-# def test_view_logs_endpoint():
-#     # Test de l'endpoint view-logs pour un utilisateur admin
-#     response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjE6cGFzc3dvcmQx"}) 
-#     assert response.status_code == 200
-#     assert "logs" in response.json()
+def test_view_logs_endpoint():
+    # Test de l'endpoint view-logs pour un utilisateur admin
+    response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjE6cGFzc3dvcmQx"}) 
+    assert response.status_code == 200
+    assert "logs" in response.json()
 
 # def test_view_logs_endpoint_non_admin():
 #     # Test de l'endpoint view-logs pour un utilisateur non admin
