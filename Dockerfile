@@ -6,10 +6,8 @@ COPY ./requirements.txt /src/requirements.txt
 
 RUN pip install --upgrade -r /src/requirements.txt
 
-COPY ./src/test_main.py /src/test_main.py
+EXPOSE 80
 
-RUN pytest
-
-COPY ./src/main.py /src/main.py
+COPY ./src /src/
  
 CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
