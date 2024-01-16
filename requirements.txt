@@ -1,6 +1,7 @@
 annotated-types==0.6.0
 anyio==4.2.0
 certifi==2023.11.17
+click==8.1.7
 colorama==0.4.6
 exceptiongroup==1.2.0
 fastapi==0.109.0
@@ -28,3 +29,4 @@ threadpoolctl==3.2.0
 tomli==2.0.1
 typing_extensions==4.9.0
 tzdata==2023.4
+uvicorn==0.25.0
