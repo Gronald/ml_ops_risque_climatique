@@ -10,6 +10,7 @@ joblib = "*"
 pytest = "*"
 httpx = "*"
 scikit-learn = "*"
+uvicorn = "*"
 
 [dev-packages]
 

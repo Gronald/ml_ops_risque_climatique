@@ -113,6 +113,10 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
 
     return pred
 
+@app.get("/version")
+def get_version():
+    return {"version":"1.0.0"}
+
 #Endpoint pour afficher les logs si l'utilisateur est un administrateur
 @app.get("/view-logs")
 def view_logs(user: dict = Depends(get_current_user)):

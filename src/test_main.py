@@ -3,6 +3,7 @@ from src.main import app
 import json
 from fastapi.testclient import TestClient
 import pytest
+from scr.main import __version__
 
 client = TestClient(app)
 
@@ -11,7 +12,7 @@ client = TestClient(app)
 # https://fastapi.tiangolo.com/tutorial/testing/
 
 def test_read_main():
-    response = client.get("/")
+    response = client.get("/version")
     assert response.status_code == 200
     assert response.json() == {"msg": "Hello World"}
 
