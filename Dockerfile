@@ -1,13 +1,11 @@
 FROM python:3.8
 
-WORKDIR /src
+WORKDIR /app
 
-COPY ./src/requirements.txt /src/requirements.txt
+COPY /src /app/src
+
+COPY /models /app/models
 
 RUN pip install --no-cache-dir --upgrade -r /src/requirements.txt
-
-COPY ./src/main.py /src/main.py
-
-COPY ./models/model.joblib   /models/model.joblib
  
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
