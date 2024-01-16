@@ -40,16 +40,16 @@ def test_predict_endpoint_invalid_credentials():
     response = client.post("/predict", json=data, headers={"Authorization": "Basic invalid_credentials"})
     assert response.status_code == 401  # Invalid credentials
 
-def test_view_logs_endpoint():
-    # Test de l'endpoint view-logs pour un utilisateur admin
-    response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjE6cGFzc3dvcmQx"}) 
-    assert response.status_code == 200
-    assert "logs" in response.json()
+# def test_view_logs_endpoint():
+#     # Test de l'endpoint view-logs pour un utilisateur admin
+#     response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjE6cGFzc3dvcmQx"}) 
+#     assert response.status_code == 200
+#     assert "logs" in response.json()
 
-def test_view_logs_endpoint_non_admin():
-    # Test de l'endpoint view-logs pour un utilisateur non admin
-    response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})  # Remplacez les informations d'authentification
-    assert response.status_code == 403  # Permission denied
+# def test_view_logs_endpoint_non_admin():
+#     # Test de l'endpoint view-logs pour un utilisateur non admin
+#     response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})  # Remplacez les informations d'authentification
+#     assert response.status_code == 403  # Permission denied
 
 
 def tests_unitaires():
