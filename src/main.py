@@ -119,17 +119,17 @@ async def read_main():
     return {"msg": "MC Intro MLOPS"}
 
 #Endpoint pour afficher les logs si l'utilisateur est un administrateur
-# @app.get("/view-logs")
-# def view_logs(user: dict = Depends(get_current_user)):
-#     if user["role"] != "admin":
-#         raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
+@app.get("/view-logs")
+def view_logs(user: dict = Depends(get_current_user)):
+    if user["role"] != "admin":
+        raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
 
-#     if not os.path.exists(os.path.join("data","logs",json_file_path)):
-#         with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-#             json.dump([],json_file)
+    # if not os.path.exists(os.path.join("data","logs",json_file_path)):
+    #     with open(os.path.join("data","logs",json_file_path),"w") as json_file:
+    #         json.dump([],json_file)
 
-#     # Lire le fichier JSON et renvoyer son contenu
-#     with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-#         logs_content = json.load(log_file)
+    # # Lire le fichier JSON et renvoyer son contenu
+    # with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
+    #     logs_content = json.load(log_file)
 
-#     return {"logs": logs_content}
+    return {"msg": "Bienvenue admin !"}

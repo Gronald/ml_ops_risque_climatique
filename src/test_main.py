@@ -14,17 +14,17 @@ def test_read_main():
     assert response.json() == {"msg": "MC Intro MLOPS"}
 
 
-# def test_predict_endpoint():
-#     # Test avec des valeurs valides
-#     data = {
-#         "latitude": 40.0,
-#         "longitude": -75.0,
-#         "annee": 2022
-#     }
-#     response = client.post("/predict", json=data)
-#     assert response.status_code == 200
-#     assert "prediction" in response.json()
-#     assert "probability" in response.json()
+def test_predict_endpoint():
+    # Test avec des valeurs valides
+    data = {
+        "latitude": 40.0,
+        "longitude": -75.0,
+        "annee": 2022
+    }
+    response = client.post("/predict", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
+    assert response.status_code == 200
+    assert "prediction" in response.json()
+    assert "probability" in response.json()
 
 def test_predict_endpoint_invalid_input():
     # Test avec des valeurs invalides
@@ -36,26 +36,20 @@ def test_predict_endpoint_invalid_input():
     response = client.post("/predict", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
     assert response.status_code == 422  # Erreur de validation des données
 
-# def test_predict_endpoint_invalid_credentials():
-#     # Test avec des informations d'authentification incorrectes
-#     data = {
-#         "latitude": 40.0,
-#         "longitude": -75.0,
-#         "annee": 2022
-#     }
-#     response = client.post("/predict", json=data, headers={"Authorization": "Basic invalid_credentials"})
-#     assert response.status_code == 401  # Invalid credentials
+def test_predict_endpoint_invalid_credentials():
+    # Test avec des informations d'authentification incorrectes
+    data = {
+        "latitude": 40.0,
+        "longitude": -75.0,
+        "annee": 2022
+    }
+    response = client.post("/predict", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQx"})
+    assert response.status_code == 401  # Invalid credentials
 
-# def test_view_logs_endpoint():
-#     # Test de l'endpoint view-logs pour un utilisateur admin
-#     response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjE6cGFzc3dvcmQx"}) 
-#     assert response.status_code == 200
-#     assert "logs" in response.json()
-
-# def test_view_logs_endpoint_non_admin():
-#     # Test de l'endpoint view-logs pour un utilisateur non admin
-#     response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})  # Remplacez les informations d'authentification
-#     assert response.status_code == 403  # Permission denied
+def test_view_logs_endpoint_non_admin():
+    # Test de l'endpoint view-logs pour un utilisateur non admin
+    response = client.get("/view-logs", headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
+    assert response.status_code == 403  # Permission denied
 
 
 def tests_unitaires():
