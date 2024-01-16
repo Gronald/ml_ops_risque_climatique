@@ -1,11 +1,15 @@
-FROM ubuntu:18.04
+FROM python:3.8
 
-COPY requirements.txt requirements.txt
+WORKDIR /src
 
-RUN apt-get update && apt-get install python3-pip -y && pip install -r requirements.txt
+COPY ./requirements.txt /src/requirements.txt
 
-RUN mkdir /src/app
-WORKDIR /src/app
-COPY . /src/app
+RUN pip install --upgrade -r /src/requirements.txt
 
-CMD uvicorn app --reload 
+COPY ./src/test_main.py /src/test_main.py
+
+RUN pytest
+
+COPY ./src/main.py /src/main.py
+ 
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "80"]
