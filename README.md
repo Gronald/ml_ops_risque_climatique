@@ -46,10 +46,9 @@ Après identification, l'utilisateur accède au endpoint /predict :
 - il rentre 3 paramètres : une latitude, une longitude et une année
 - l'API retourne la prédiction : O (pas de risque) ou 1 (risque), ainsi qu'une probabilité.
 
-Note 1 : pour l'exercice, 2 utilisateurs fictifs sont crées :
-- username: user1, password: password1
+Note 1 : pour l'exercice, un utilisateurs fictif est crée :
 - username: user2, password: password2
-Si l'utilisateur n'est pas dans cette liste ou si erreur dans les identifiants/Mot de passe, une erreur 401 'Invalid credentials' apparaitra
+Si l'utilisateur n'est pas celui ci ou si erreur dans les identifiants/Mot de passe, une erreur 401 'Invalid credentials' apparaitra
 
 Note 2 : des tests sont effectués dans les données saisies par les utilisateurs :
 - l'année saisie doit etre un nombre entier compris entre 1982 et 2023
@@ -60,14 +59,25 @@ Si ces tests sont validés, l'API renvoie un résultat, sinon des messages d'err
 Fonctionnalités pour un administrateur
 ------------
 
+Après identification, l'administrateur peut accéder à un endpoint supplémentaire /view_logs :
+Ce fichier recense l'ensemble des requêtes des utilisateurs : date de la requête, user, latitude, longitude, année, prediction et probabilité.
+
+Note 1 : pour l'exercice, 1 utilisateur administrateur a été crée :
+- username: user1, password: password1
+Si l'utilisateur n'est pas administrateur ou si erreur dans les identifiants/Mot de passe, une erreur 403 'Permission denied. Admin access required.' apparaitra
+
+
+Tests
+------------
+
+
 
 Installation
 ------------
 
 
 
-Tests
-------------
+
 
 
 
