@@ -3,14 +3,58 @@ ML_Ops_Risque_Climatique
 
 API qui permet à un utilisateur de récupérer la probabilité de catastrophe naturelle à partir de coordonnées géographiques sur le territoire Français.
 
+
+Contexte projet 
+------------
+
+Le groupe Crédit Agricole est un acteur majeur de la banque de détail avec notamment 52 millions de clients dans le monde dont 27 millions en France.
+Par ses activités de prêt aux particuliers et aux entreprises, notamment via son réseau de caisses régionales, Crédit Agricole est particulièrement attentif aux risques climatiques, pouvant affecter sa clientèle et ses biens propres, qu’ils soient physiques ou de transition.
+
+Consciente de ces enjeux et de la nécessité d’intégrer cette problématique pour assurer le développement durable de ses activités, le Groupe souhaite se doter d’un outil d’évaluation des risques physiques sur le périmètre de la France métropolitaine.
+
+
+Objectif du projet 
+------------
+
+Ce projet est la première brique d'un projet plus vaste : 
+Cette première version d'API permet à un utilisateur d'identifier le risque réel avec des données géospatiales historiques.
+
+Le but final est de définir et d’industrialiser de manière pérenne un modèle prédictif de l’exposition aux risques physiques concernant des objets financés par le Groupe sur le territoire, selon leur géolocalisation et selon leur degré de vulnérabilité.
+
+
 Données utilisées
 ------------
 
 2 types de sources publiques :
 - données GASPAR (Gestion Assistée des Procédures Administratives relatives aux Risques naturels) recensant les catastrophes naturelles depuis 1982.
 - données INSEE de recensement des communes de France
+
   
 Modèle
+------------
+
+A partir de la base des catastrophes naturelles agrégées par commune de France, utilisation de l'algorithme d'apprentissage supervisé KNN (K plus proches voisins).
+Nous cherchons à expliquer la présence d'un risque de catastrophe naturelle (OUI/NON) par les coordonnées géographiques (latitude/longitude) et l'année d'observation.
+Une gridsearch sur le nombre de voisins donne un modèle idéal à XX voisins. 
+Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise en cache efficace.
+
+
+Fonctionnalités pour un utilisateur de l'API
+------------
+
+
+
+
+Fonctionnalités pour un administrateur
+------------
+
+
+Installation
+------------
+
+
+
+Tests
 ------------
 
 
@@ -69,19 +113,4 @@ Project Organization
 <p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
 
-Installation
-------------
 
-
-
-Tests
-------------
-
-
-Fonctionnalités pour un utilisateur de l'API
-------------
-
-
-
-Fonctionnalités pour un administrateur
-------------
