@@ -42,7 +42,9 @@ Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise 
 Fonctionnalités globales de l'API
 ------------
 
+
 ![image](https://github.com/Gronald/ml_ops_risque_climatique/assets/19773220/490a485a-ecb3-45c0-b667-7a133c740309)
+
 
 
 Fonctionnalités disponibles pour un profil "utilisateur" de l'API
