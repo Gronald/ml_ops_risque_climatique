@@ -42,7 +42,19 @@ Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise 
 Fonctionnalités pour un utilisateur de l'API
 ------------
 
+Après identification, l'utilisateur accède au endpoint /predict :
+- il rentre 3 paramètres : une latitude, une longitude et une année
+- l'API retourne la prédiction : O (pas de risque) ou 1 (risque), ainsi qu'une probabilité.
 
+Note 1 : pour l'exercice, 2 utilisateurs fictifs sont crées :
+- username: user1, password: password1
+- username: user2, password: password2
+Si l'utilisateur n'est pas dans cette liste ou si erreur dans les identifiants/Mot de passe, une erreur 401 'Invalid credentials' apparaitra
+
+Note 2 : des tests sont effectués dans les données saisies par les utilisateurs :
+- l'année saisie doit etre un nombre entier compris entre 1982 et 2023
+- la latitude et la longitude doit être comprise entre -90 et 90
+Si ces tests sont validés, l'API renvoie un résultat, sinon des messages d'erreur afin de resaisir correctement les données.
 
 
 Fonctionnalités pour un administrateur
