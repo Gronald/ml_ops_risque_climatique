@@ -39,6 +39,12 @@ Une gridsearch sur le nombre de voisins donne un modèle idéal à XX voisins.
 Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise en cache efficace.
 
 
+Fonctionnalités globales de l'API
+------------
+
+![image](https://github.com/Gronald/ml_ops_risque_climatique/assets/19773220/490a485a-ecb3-45c0-b667-7a133c740309)
+
+
 Fonctionnalités pour un utilisateur de l'API
 ------------
 
