@@ -30,7 +30,7 @@ Données utilisées
 - données INSEE de recensement des communes de France
 
   
-Modèle
+Modèle utilisé
 ------------
 
 A partir de la base des catastrophes naturelles agrégées par commune de France, utilisation de l'algorithme d'apprentissage supervisé KNN (K plus proches voisins).
@@ -45,7 +45,7 @@ Fonctionnalités globales de l'API
 ![image](https://github.com/Gronald/ml_ops_risque_climatique/assets/19773220/490a485a-ecb3-45c0-b667-7a133c740309)
 
 
-Fonctionnalités pour un utilisateur de l'API
+Fonctionnalités disponibles pour un profil "utilisateur" de l'API
 ------------
 
 Après identification, l'utilisateur accède au endpoint /predict :
@@ -61,7 +61,7 @@ Note 2 : des tests sont effectués dans les données saisies par les utilisateur
 Si ces tests sont validés, l'API renvoie un résultat, sinon des messages d'erreur afin de resaisir correctement les données.
 
 
-Fonctionnalités pour un administrateur
+Fonctionnalités disponibles pour un profil "administrateur" de l'API
 ------------
 
 Après identification, l'administrateur peut accéder à un endpoint supplémentaire /view_logs :
@@ -87,7 +87,7 @@ Installation
 ------------
 
 DETAILLER COMMANDES FINALES A LANCER
-
++ CHEMIN ACCES A LA DOC
 
 Project Organization
 ------------
