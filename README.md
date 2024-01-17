@@ -70,15 +70,19 @@ Si l'utilisateur n'est pas administrateur ou si erreur dans les identifiants/Mot
 Tests
 ------------
 
+Les tests pytest sont intégrés dans une github actions et porte sur plusieurs niveaux, du plus général au plus spécifique :
+- L'API est fonctionnelle
+- Le endpoint /predict est accessible et renvoie des données
+- L'utilisateur rentre une latitude hors normes, un message d'erreur apparaît
+- L'utilisateur n'est pas authentifié, un message d'erreur apparaît
+- Le endpoint /view_logs n'est pas accessible avec des identifiants qui ne correspondent pas a un profil admin
+- Enfin, 4 tests unitaires de contrôle de contenu sur le endpoint /predict avec un utilisateur authentifié correctement
 
 
 Installation
 ------------
 
-
-
-
-
+DETAILLER COMMANDES FINALES A LANCER
 
 
 Project Organization
