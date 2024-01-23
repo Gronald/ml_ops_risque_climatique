@@ -23,9 +23,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Create Empty JSON File
-      run: |
-        echo '{}' > ml_ops_risque_climatique/data/logs/results_query.json
+    - name: create-json
+        id: create-json
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+          name: "credentials.json"
+          json: ${{"hello" }}
 
     - name: Run Tests
       run: |
