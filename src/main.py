@@ -91,27 +91,29 @@ def authenticate_user(username: str, password: str):
 
 
 @app.post("/predict")
-def predict(params : ModelParams,user: dict = Depends(get_current_user)):
+def predict(params : ModelParams,user: dict = Depends(get_current_user),save = True):
     pred = get_prediction(params.latitude, params.longitude, params.annee)
 
-    log_info = {
-        'datetime': datetime.utcnow().isoformat(),
-        'user': user["username"],
-        'latitude': params.latitude,
-        'longitude': params.longitude,
-        'annee': params.annee,
-        'prediction': pred.get('prediction'),
-        'probability': pred.get('probability')
-    }
+    if not save : 
 
-    with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-        existing_data = json.load(log_file)
+        log_info = {
+            'datetime': datetime.utcnow().isoformat(),
+            'user': user["username"],
+            'latitude': params.latitude,
+            'longitude': params.longitude,
+            'annee': params.annee,
+            'prediction': pred.get('prediction'),
+            'probability': pred.get('probability')
+        }
 
-    existing_data.append(log_info)
+        with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
+            existing_data = json.load(log_file)
 
-    #Stockage des logs dans un fichier JSON
-    with open(os.path.join("data","logs",json_file_path), 'w') as updated_file:
-        json.dump(existing_data,updated_file)
+        existing_data.append(log_info)
+
+        #Stockage des logs dans un fichier JSON
+        with open(os.path.join("data","logs",json_file_path), 'w') as updated_file:
+            json.dump(existing_data,updated_file)
 
     return pred
 
