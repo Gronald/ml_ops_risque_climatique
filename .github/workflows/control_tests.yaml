@@ -23,7 +23,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name : Print current working directory 
-      run : |
-        ls -l
+    - name: Run Tests
+      run: |
+        python -m pytest
 
