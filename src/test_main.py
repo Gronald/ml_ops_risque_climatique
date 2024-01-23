@@ -21,7 +21,7 @@ def test_predict_endpoint():
         "longitude": -75.0,
         "annee": 2022
     }
-    response = client.post("/predict", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
+    response = client.post("/predict?save=False", json=data, headers={"Authorization": "Basic dXNlcjI6cGFzc3dvcmQy"})
     assert response.status_code == 200
     assert "prediction" in response.json()
     assert "probability" in response.json()
