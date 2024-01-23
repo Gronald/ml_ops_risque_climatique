@@ -24,11 +24,12 @@ jobs:
         pip install -r requirements.txt
 
     - name: create-json
-        id: create-json
-        uses: jsdaniell/create-json@v1.2.2
-        with:
-          name: "credentials.json"
-          json: ${{"hello" }}
+          id: create-json
+          uses: jsdaniell/create-json@v1.2.2
+          with:
+          name: "results_query.json"
+          json: '{"name":"jsdaniell", "password":"mypass"}'
+            dir: 'data/logs/'
 
     - name: Run Tests
       run: |

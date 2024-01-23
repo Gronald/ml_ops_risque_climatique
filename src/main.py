@@ -4,12 +4,17 @@ from pydantic import BaseModel, Field, validator
 import json 
 from datetime import datetime
 import os 
-json_file_path = "results_query.json"
 
+
+json_file_path = "results_query.json"
 from joblib import load 
 
-clf = load('./models/model.joblib')
+clf = load('models/model.joblib')
 
+
+if not os.path.exists(os.path.join("data","logs",json_file_path)):
+    with open(os.path.join("data","logs",json_file_path),"w") as json_file:
+        json.dump([],json_file)
 
 
 # Configurer l'authentification HTTP Basic 
