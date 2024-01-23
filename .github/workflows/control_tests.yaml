@@ -25,5 +25,5 @@ jobs:
 
     - name : Print current working directory 
       run : |
-        pwd
+        ls -l
 
