@@ -10,6 +10,10 @@ json_file_path = "results_query.json"
 
 clf = load('./models/model.joblib')
 
+if not os.path.exists(os.path.join("data","logs",json_file_path)):
+    with open(os.path.join("data","logs",json_file_path),"w") as json_file:
+        json.dump([],json_file)
+
 # Configurer l'authentification HTTP Basic 
 security = HTTPBasic()
 
@@ -97,11 +101,6 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
         'probability': pred.get('probability')
     }
 
-    if not os.path.exists(os.path.join("data","logs",json_file_path)):
-        with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-            json.dump([],json_file)
-
-
     with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
         existing_data = json.load(log_file)
 
@@ -124,12 +123,8 @@ def view_logs(user: dict = Depends(get_current_user)):
     if user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
 
-    if not os.path.exists(os.path.join("data","logs",json_file_path)):
-        with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-            json.dump([],json_file)
-
     # Lire le fichier JSON et renvoyer son contenu
     with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
         logs_content = json.load(log_file)
 
-    return {"msg": "Bienvenue admin !"}
+    return logs_content
