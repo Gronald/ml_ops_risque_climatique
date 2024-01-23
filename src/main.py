@@ -8,7 +8,7 @@ import os
 from joblib import load 
 json_file_path = "results_query.json"
 
-clf = load('models/model.joblib')
+clf = load('./models/model.joblib')
 
 # Configurer l'authentification HTTP Basic 
 security = HTTPBasic()
@@ -87,29 +87,29 @@ def authenticate_user(username: str, password: str):
 def predict(params : ModelParams,user: dict = Depends(get_current_user)):
     pred = get_prediction(params.latitude, params.longitude, params.annee)
 
-    # log_info = {
-    #     'datetime': datetime.utcnow().isoformat(),
-    #     'user': user["username"],
-    #     'latitude': params.latitude,
-    #     'longitude': params.longitude,
-    #     'annee': params.annee,
-    #     'prediction': pred.get('prediction'),
-    #     'probability': pred.get('probability')
-    # }
+    log_info = {
+        'datetime': datetime.utcnow().isoformat(),
+        'user': user["username"],
+        'latitude': params.latitude,
+        'longitude': params.longitude,
+        'annee': params.annee,
+        'prediction': pred.get('prediction'),
+        'probability': pred.get('probability')
+    }
 
-    # if not os.path.exists(os.path.join("data","logs",json_file_path)):
-    #     with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-    #         json.dump([],json_file)
+    if not os.path.exists(os.path.join("data","logs",json_file_path)):
+        with open(os.path.join("data","logs",json_file_path),"w") as json_file:
+            json.dump([],json_file)
 
 
-    # with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-    #     existing_data = json.load(log_file)
+    with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
+        existing_data = json.load(log_file)
 
-    # existing_data.append(log_info)
+    existing_data.append(log_info)
 
-    # #Stockage des logs dans un fichier JSON
-    # with open(os.path.join("data","logs",json_file_path), 'w') as updated_file:
-    #     json.dump(existing_data,updated_file)
+    #Stockage des logs dans un fichier JSON
+    with open(os.path.join("data","logs",json_file_path), 'w') as updated_file:
+        json.dump(existing_data,updated_file)
 
     return pred
 
@@ -124,12 +124,12 @@ def view_logs(user: dict = Depends(get_current_user)):
     if user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
 
-    # if not os.path.exists(os.path.join("data","logs",json_file_path)):
-    #     with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-    #         json.dump([],json_file)
+    if not os.path.exists(os.path.join("data","logs",json_file_path)):
+        with open(os.path.join("data","logs",json_file_path),"w") as json_file:
+            json.dump([],json_file)
 
-    # # Lire le fichier JSON et renvoyer son contenu
-    # with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-    #     logs_content = json.load(log_file)
+    # Lire le fichier JSON et renvoyer son contenu
+    with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
+        logs_content = json.load(log_file)
 
     return {"msg": "Bienvenue admin !"}
