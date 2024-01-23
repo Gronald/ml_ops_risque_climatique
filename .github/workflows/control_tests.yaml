@@ -25,7 +25,7 @@ jobs:
 
     - name: Create Empty JSON File
       run: |
-        echo '{}' > /data/logs/results_query.json
+        echo '{}' > ml_ops_risque_climatique/data/logs/results_query.json
 
     - name: Run Tests
       run: |
