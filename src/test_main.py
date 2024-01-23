@@ -1,5 +1,5 @@
-from src.main import get_prediction
-from src.main import app
+from .main import get_prediction
+from .main import app
 import json
 from fastapi.testclient import TestClient
 

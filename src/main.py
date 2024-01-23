@@ -3,11 +3,12 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from pydantic import BaseModel, Field, validator 
 import json 
 from datetime import datetime
-# from ML_OPS_RISQUE_CLIMARIQUE.src.models.predict_model import clf
 import os 
-from src.main import clf
-from src.main import json_file_path
+json_file_path = "results_query.json"
 
+from joblib import load 
+
+clf = load('./models/model.joblib')
 
 
 
