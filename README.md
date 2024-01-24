@@ -44,12 +44,7 @@ Installation
 
 ### Environnement python
 Le projet utilise python 3.8 dans un container Docker.
-
-L'ensemble des dépendances python sont listées dans le fichier Pipfile.
-Celles-ci peuvent être installées à l'aide de pipenv avec pipenv install [-d].
-
 L'API est réalisée avec le framework FastApi.
-
 Le serveur de production utilisée dans l'image résultante est uvicorn.
 
 ### Récupérer le projet depuis Github
@@ -63,12 +58,12 @@ uvicorn main:app --reload
 
 Ouvrir le navigateur à l'adresse : 
 http://127.0.0.1:8000
-=> COPIE ECRAN
+=> COPIE ECRAN A AJOUTER
 
 ### Documentation interactive
 Ouvrir le navigateur à l'adresse : 
 http://127.0.0.1:8000/docs
-=> COPIE ECRAN
+=> COPIE ECRAN A AJOUTER
 
 
 Project Organization
@@ -79,11 +74,7 @@ Project Organization
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── logs           <- LOG files, admin mode
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │   └── raw            <- The Database for model
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
