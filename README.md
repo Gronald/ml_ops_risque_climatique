@@ -48,13 +48,19 @@ L'API est réalisée avec le framework FastApi.
 Le serveur de production utilisée dans l'image résultante est uvicorn.
 
 ### Récupérer le projet depuis Github
+```
 git clone https://github.com/Gronald/ml_ops_risque_climatique.git
+```
 
 ### Installation des prérequis
+```
 pip install -r requirements.txt
+```
 
 ### Commande pour lancer l'API
+```
 uvicorn main:app --reload
+```
 
 Ouvrir le navigateur à l'adresse : 
 http://127.0.0.1:8000
