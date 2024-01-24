@@ -28,7 +28,6 @@ class ModelParams(BaseModel):
     annee: int = Field(..., description="L'année doit être un nombre entier.")
 
     @field_validator("latitude", "longitude")
-    @classmethod
     def validate_coordinates(cls, value):
         if not -90 <= value <= 90:
             raise ValueError("Les coordonnées doivent être comprises entre -90 et 90.")
@@ -90,8 +89,9 @@ def read_json() :
          return json.load(log_file)
     
 def create_json() :
-    with open(os.path.join("src","data","logs",json_file_name),"w") as json_file:
-        json.dump([],json_file)
+    if not os.path.exists(os.path.join("src","data","logs",json_file_name)):
+        with open(os.path.join("src","data","logs",json_file_name),"w") as json_file:
+            json.dump({},json_file)
 
 
 @app.post("/predict")
@@ -110,12 +110,11 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
 
     try :
         json_file = read_json()
-
     except FileNotFoundError :
         create_json()
         json_file = read_json()
     
-    json_file.append(log_info)
+    json_file.update(log_info)
 
     #Stockage des logs dans un fichier JSON
     with open(os.path.join("src","data","logs",json_file_name), 'w') as updated_file:
@@ -133,10 +132,8 @@ async def read_main():
 def view_logs(user: dict = Depends(get_current_user)):
     if user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
-
     try :
         json_file = read_json()
-
     except FileNotFoundError :
         create_json()
         json_file = read_json()

@@ -23,10 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Update config.json
-        run: echo "`jq '.sampleArray[0].id="5"' config.json`" > config.json
-    - name: read config.json
-        run: cat config.json
-
+    - name: Run Tests
+      run: |
+        python -m pytest
 
 
