@@ -39,6 +39,74 @@ Une gridsearch sur le nombre de voisins donne un modèle idéal à XX voisins.
 Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise en cache efficace.
 
 
+Installation
+------------
+
+### Environnement python
+Le projet utilise python 3.8 dans un container Docker.
+
+L'ensemble des dépendances python sont listées dans le fichier Pipfile.
+Celles-ci peuvent être installées à l'aide de pipenv avec pipenv install [-d].
+
+L'API est réalisée avec le framework FastApi.
+
+Le serveur de production utilisée dans l'image résultante est uvicorn.
+
+### Récupérer le projet depuis Github
+git clone https://github.com/Gronald/ml_ops_risque_climatique.git
+
+### Installation des prérequis
+pip install -r requirements.txt
+
+### Commande pour lancer l'API
+uvicorn main:app --reload
+
+Ouvrir le navigateur à l'adresse : 
+http://127.0.0.1:8000
+=> COPIE ECRAN
+
+### Documentation interactive
+Ouvrir le navigateur à l'adresse : 
+http://127.0.0.1:8000/docs
+=> COPIE ECRAN
+
+
+Project Organization
+------------
+
+    ├── LICENSE
+    ├── Makefile           <- Makefile with commands like `make data` or `make train`
+    ├── README.md          <- The top-level README for developers using this project.
+    ├── data
+    │   ├── logs           <- LOG files, admin mode
+    │   └── raw            <- The original, immutable data dump.
+    │
+    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    │
+    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │
+    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    │
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
+    │                         generated with `pip freeze > requirements.txt`
+    │
+    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── src                <- Source code for use in this project.
+    │   ├── models         <- Scripts to train models and then use trained models to make
+    │   │   │                 predictions
+    │   │   └── train_model.py
+    │   ├── main.py        <- FastAPI script
+    │   ├── test_main.py   <- Pytest    
+    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+
+
+--------
+
+<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+
 Fonctionnalités globales de l'API
 ------------
 
@@ -87,84 +155,6 @@ Les tests pytest sont intégrés dans une github actions et porte sur plusieurs 
 Les tests reposent sur pytest et sont stockés dans le dossier src. 
 Ils peuvent tous être lancés avec la commande pytest dans le Terminal.
 
-Installation
-------------
-
-### Environnement python
-Le projet utilise python 3.8 dans un container Docker.
-
-L'ensemble des dépendances python sont listées dans le fichier Pipfile.
-Celles-ci peuvent être installées à l'aide de pipenv avec pipenv install [-d].
-
-Pour télécharger l'ensemble des dépendances du projet afin de les porter ensuite
-sur une machine qui disposerait d'un accès limité à internet, il faut utiliser la commande
-pipenv lock -r > requirements.txt qui va transformer le Pipfile en un requirements.txt.
-
-L'API est réalisée avec le framework FastApi.
-
-Le serveur de production utilisée dans l'image résultante est uvicorn.
-
-### Commande pour lancer l'API
-uvicorn main:app --reload
-
-Ouvrir le navigateur à l'adresse : 
-
-### Documentation interactive
-Ouvrir le navigateur à l'adresse : 
-
-
-Project Organization
-------------
-
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
-
---------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
 
 
 
