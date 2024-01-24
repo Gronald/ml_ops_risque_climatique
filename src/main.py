@@ -1,21 +1,15 @@
 from fastapi import FastAPI, Depends, HTTPException, Request
 from fastapi.security import HTTPBasic, HTTPBasicCredentials 
-from pydantic import BaseModel, Field, validator 
+from pydantic import BaseModel, field_validator, Field 
 import json 
 from datetime import datetime
 import os 
 
 
-json_file_path = "results_query.json"
+json_file_name = "results_query.json"
 from joblib import load 
 
 clf = load('models/model.joblib')
-
-
-if not os.path.exists(os.path.join("data","logs",json_file_path)):
-    with open(os.path.join("data","logs",json_file_path),"w") as json_file:
-        json.dump([],json_file)
-
 
 # Configurer l'authentification HTTP Basic 
 security = HTTPBasic()
@@ -33,13 +27,14 @@ class ModelParams(BaseModel):
     longitude: float = Field(..., description="La longitude doit être un nombre décimal.")
     annee: int = Field(..., description="L'année doit être un nombre entier.")
 
-    @validator("latitude", "longitude")
+    @field_validator("latitude", "longitude")
+    @classmethod
     def validate_coordinates(cls, value):
         if not -90 <= value <= 90:
             raise ValueError("Les coordonnées doivent être comprises entre -90 et 90.")
         return value
 
-    @validator("annee")
+    @field_validator("annee")
     def validate_year(cls, value):
         if not 1982 <= value <= 2023:
             raise ValueError(f"L'année doit être comprise entre 1982 et 2023.")
@@ -90,30 +85,45 @@ def authenticate_user(username: str, password: str):
     return None
 
 
+def read_json() :
+    with open(os.path.join("data","logs",json_file_name), 'r') as log_file:
+         return json.load(log_file)
+    
+def create_json() :
+    with open(os.path.join("data","logs",json_file_name),"w") as json_file:
+        json.dump([],json_file)
+
+
+def save_json() :
+    with open(os.path.join("data","logs",json_file_name),"w") as json_file:
+        json.dump([],json_file)
+
 @app.post("/predict")
-def predict(params : ModelParams,user: dict = Depends(get_current_user),save = True):
+def predict(params : ModelParams,user: dict = Depends(get_current_user)):
     pred = get_prediction(params.latitude, params.longitude, params.annee)
 
-    if not save : 
+    log_info = {
+        'datetime': datetime.utcnow().isoformat(),
+        'user': user["username"],
+        'latitude': params.latitude,
+        'longitude': params.longitude,
+        'annee': params.annee,
+        'prediction': pred.get('prediction'),
+        'probability': pred.get('probability')
+    }
 
-        log_info = {
-            'datetime': datetime.utcnow().isoformat(),
-            'user': user["username"],
-            'latitude': params.latitude,
-            'longitude': params.longitude,
-            'annee': params.annee,
-            'prediction': pred.get('prediction'),
-            'probability': pred.get('probability')
-        }
+    try :
+        json_file = read_json()
 
-        with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-            existing_data = json.load(log_file)
+    except FileNotFoundError :
+        create_json()
+        json_file = read_json()
+    
+    json_file.append(log_info)
 
-        existing_data.append(log_info)
-
-        #Stockage des logs dans un fichier JSON
-        with open(os.path.join("data","logs",json_file_path), 'w') as updated_file:
-            json.dump(existing_data,updated_file)
+    #Stockage des logs dans un fichier JSON
+    with open(os.path.join("data","logs",json_file_name), 'w') as updated_file:
+        json.dump(json_file,updated_file)
 
     return pred
 
@@ -128,8 +138,11 @@ def view_logs(user: dict = Depends(get_current_user)):
     if user["role"] != "admin":
         raise HTTPException(status_code=403, detail="Permission denied. Admin access required.")
 
-    # Lire le fichier JSON et renvoyer son contenu
-    with open(os.path.join("data","logs",json_file_path), 'r') as log_file:
-        logs_content = json.load(log_file)
+    try :
+        json_file = read_json()
 
-    return logs_content
+    except FileNotFoundError :
+        create_json()
+        json_file = read_json()
+
+    return json_file
