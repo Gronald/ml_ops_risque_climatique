@@ -85,13 +85,13 @@ def authenticate_user(username: str, password: str):
 
 
 def read_json() :
-    with open(os.path.join("src","data","logs",json_file_name), 'r') as log_file:
+    with open(os.path.join("data","logs",json_file_name), 'r') as log_file:
          return json.load(log_file)
     
 def create_json() :
-    if not os.path.exists(os.path.join("src","data","logs",json_file_name)):
-        with open(os.path.join("src","data","logs",json_file_name),"w") as json_file:
-            json.dump({},json_file)
+    if not os.path.exists(os.path.join("data","logs",json_file_name)):
+        with open(os.path.join("data","logs",json_file_name),"w") as json_file:
+            json.dump([],json_file)
 
 
 @app.post("/predict")
@@ -114,10 +114,10 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
         create_json()
         json_file = read_json()
     
-    json_file.update(log_info)
+    json_file.append(log_info)
 
     #Stockage des logs dans un fichier JSON
-    with open(os.path.join("src","data","logs",json_file_name), 'w') as updated_file:
+    with open(os.path.join("data","logs",json_file_name), 'w') as updated_file:
         json.dump(json_file,updated_file)
 
     return pred
