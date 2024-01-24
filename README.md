@@ -84,12 +84,34 @@ Les tests pytest sont intégrés dans une github actions et porte sur plusieurs 
 - Le endpoint /view_logs n'est pas accessible avec des identifiants qui ne correspondent pas a un profil admin
 - Enfin, 4 tests unitaires de contrôle de contenu sur le endpoint /predict avec un utilisateur authentifié correctement
 
+Les tests reposent sur pytest et sont stockés dans le dossier src. 
+Ils peuvent tous être lancés avec la commande pytest dans le Terminal.
 
 Installation
 ------------
 
-DETAILLER COMMANDES FINALES A LANCER
-+ CHEMIN ACCES A LA DOC
+### Environnement python
+Le projet utilise python 3.8 dans un container Docker.
+
+L'ensemble des dépendances python sont listées dans le fichier Pipfile.
+Celles-ci peuvent être installées à l'aide de pipenv avec pipenv install [-d].
+
+Pour télécharger l'ensemble des dépendances du projet afin de les porter ensuite
+sur une machine qui disposerait d'un accès limité à internet, il faut utiliser la commande
+pipenv lock -r > requirements.txt qui va transformer le Pipfile en un requirements.txt.
+
+L'API est réalisée avec le framework FastApi.
+
+Le serveur de production utilisée dans l'image résultante est uvicorn.
+
+### Commande pour lancer l'API
+uvicorn main:app --reload
+
+Ouvrir le navigateur à l'adresse : 
+
+### Documentation interactive
+Ouvrir le navigateur à l'adresse : 
+
 
 Project Organization
 ------------
