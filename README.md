@@ -59,17 +59,20 @@ pip install -r requirements.txt
 
 ### Commande pour lancer l'API
 ```
-uvicorn main:app --reload
+uvicorn src.main:app --reload
 ```
 
 Ouvrir le navigateur à l'adresse : 
 http://127.0.0.1:8000
-=> COPIE ECRAN A AJOUTER
+
+![image](https://github.com/Gronald/ml_ops_risque_climatique/assets/19773220/5a5f3923-4b13-4108-8f21-6e044576f019)
+
 
 ### Documentation interactive
 Ouvrir le navigateur à l'adresse : 
 http://127.0.0.1:8000/docs
-=> COPIE ECRAN A AJOUTER
+
+![image](https://github.com/Gronald/ml_ops_risque_climatique/assets/19773220/f0832eb1-3a07-4548-b7e3-2ea54b693277)
 
 
 Project Organization
