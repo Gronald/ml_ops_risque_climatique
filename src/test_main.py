@@ -11,7 +11,7 @@ client = TestClient(app)
 def test_read_main():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"msg": "MC Intro MLOPS"}
+    assert response.json() == {"msg": "Bienvenue dans l API Risque Climatique !"}
 
 
 def test_predict_endpoint():
