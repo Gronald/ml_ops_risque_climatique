@@ -125,7 +125,7 @@ def predict(params : ModelParams,user: dict = Depends(get_current_user)):
 
 @app.get("/")
 async def read_main():
-    return {"msg": "MC Intro MLOPS"}
+    return {"msg": "Bienvenue dans l'API Risque Climatique !"}
 
 #Endpoint pour afficher les logs si l'utilisateur est un administrateur
 @app.get("/view-logs")
