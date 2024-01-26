@@ -27,7 +27,7 @@ Données utilisées
 
 2 types de sources publiques :
 - données GASPAR (Gestion Assistée des Procédures Administratives relatives aux Risques naturels) recensant les catastrophes naturelles depuis 1982.
-- données INSEE de recensement des communes de France
+- données OpenStreetMap de recensement des communes de France
 
   
 Modèle utilisé
@@ -35,7 +35,7 @@ Modèle utilisé
 
 A partir de la base des catastrophes naturelles agrégées par commune de France, utilisation de l'algorithme d'apprentissage supervisé KNN (K plus proches voisins).
 Nous cherchons à expliquer la présence d'un risque de catastrophe naturelle (OUI/NON) par les coordonnées géographiques (latitude/longitude) et l'année d'observation.
-Une gridsearch sur le nombre de voisins donne un modèle idéal à XX voisins. 
+Une gridsearch sur le nombre de voisins donne un modèle idéal à 15 voisins. 
 Ce modèle qui est repris dans l'API, via la bibliothèque Joblib pour une mise en cache efficace.
 
 
@@ -51,6 +51,7 @@ Le serveur de production utilisée dans l'image résultante est uvicorn.
 ```
 git clone https://github.com/Gronald/ml_ops_risque_climatique.git
 ```
+puis se déplacer dans le répertoire crée
 
 ### Installation des prérequis
 ```
@@ -78,29 +79,21 @@ http://127.0.0.1:8000/docs
 Project Organization
 ------------
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── .github/workflows      <- Github action
     ├── data
-    │   ├── logs           <- LOG files, admin mode
-    │   └── raw            <- The Database for model
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   └── train_model.py
-    │   ├── main.py        <- FastAPI script
-    │   ├── test_main.py   <- Pytest    
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
-
+    │   ├── logs               <- Fichiers de log accessible en mode administrateur
+    │   └── raw                <- Base des catastrophes naturelles agrégées utilisée pour le modèle KNN
+    ├── models                 <- joblib contenant le modèle retenu 
+    ├── reports                <- Présentation PPT de l'API pour la soutenance   
+    ├── src                
+    │   ├── models         
+    │   │   └── train_model.py <- Script pour entrainement du modèle et choix du modèle optimal
+    │   ├── main.py            <- Script FastAPI
+    │   ├── test_main.py       <- Tests pytest      
+    ├── .gitignore
+    ├── Dockerfile             <- Instructions nécessaires à la création de l'image de conteneur
+    ├── requirements.txt       <- Fichier de requirements pour reproduire l'environnement
+    ├── README.md              <- Informations importantes du projet
 
 --------
 
@@ -120,7 +113,7 @@ Fonctionnalités disponibles pour un profil "utilisateur" de l'API
 
 Après identification, l'utilisateur accède au endpoint /predict :
 - il rentre 3 paramètres : une latitude, une longitude et une année
-- l'API retourne la prédiction : O (pas de risque) ou 1 (risque), ainsi qu'une probabilité.
+- l'API retourne la prédiction : 0 (pas de risque) ou 1 (risque), ainsi qu'une probabilité.
 
 Note 1 : pour l'exercice, un utilisateurs fictif est crée : {username: "user2", password: "password2"}
 Si l'utilisateur n'est pas celui ci ou si erreur dans les identifiants/Mot de passe, une erreur 401 'Invalid credentials' apparaitra
